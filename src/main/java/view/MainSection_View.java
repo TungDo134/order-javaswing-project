@@ -52,7 +52,7 @@ public class MainSection_View extends JFrame {
     // bill in4
     private JTextField field_result_Bill;
     private JTextField field_idCus_Bill;
-
+    private JComboBox<String> comboBox_Cus_Bill;
     //
     ArrayList<Customer> customers = CustomerDAO.getInstance().selectAll();
     ArrayList<Product> product_list = ProductDAO.getInstance().selectAll();
@@ -60,6 +60,7 @@ public class MainSection_View extends JFrame {
 
     // action listener
     ActionListener listener = new MainSection_Controller(this);
+
 
 
     public MainSection_View() {
@@ -638,7 +639,7 @@ public class MainSection_View extends JFrame {
         comboBox_Cus.setFont(font2);
         comboBox_Cus.addActionListener(e -> {
             String src = Objects.requireNonNull(comboBox_Cus.getSelectedItem()).toString();
-            String id = CustomerDAO.getInstance().findIdCustomer(src);
+            String id = CustomerDAO.getInstance().findId(src);
             field_idCus_o.setText(id);
         });
 
@@ -652,7 +653,7 @@ public class MainSection_View extends JFrame {
         comboBox_Product.setFont(font2);
         comboBox_Product.addActionListener(e -> {
             String src = Objects.requireNonNull(comboBox_Product.getSelectedItem()).toString();
-            String id = ProductDAO.getInstance().findIdCustomer(src);
+            String id = ProductDAO.getInstance().findId(src);
             field_idProduct_o.setText(id);
         });
 
@@ -754,15 +755,14 @@ public class MainSection_View extends JFrame {
         for (int i = 0; i < customers.size(); i++) {
             nameCus[i] = customers.get(i).getName();
         }
-        JComboBox<String> comboBox_Cus_Bill = new JComboBox<>(nameCus);
+        comboBox_Cus_Bill = new JComboBox<>(nameCus);
         Font font3 = new Font("Arial", Font.PLAIN, 15);
         comboBox_Cus_Bill.setFont(font2);
         comboBox_Cus_Bill.addActionListener(e -> {
             String src = Objects.requireNonNull(comboBox_Cus_Bill.getSelectedItem()).toString();
-            String id = CustomerDAO.getInstance().findIdCustomer(src);
+            String id = CustomerDAO.getInstance().findId(src);
             field_idCus_Bill.setText(id);
         });
-
 
         sub_panel.add(label_nameCus);
         sub_panel.add(comboBox_Cus_Bill);
@@ -850,6 +850,10 @@ public class MainSection_View extends JFrame {
 
     public JComboBox<String> getComboBox_Cus() {
         return comboBox_Cus;
+    }
+
+    public JComboBox<String> getComboBox_Cus_Bill() {
+        return comboBox_Cus_Bill;
     }
 
     public JComboBox<String> getComboBox_Product() {

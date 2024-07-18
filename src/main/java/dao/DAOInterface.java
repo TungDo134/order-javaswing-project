@@ -17,5 +17,5 @@ public interface DAOInterface<T> {
 
     int deleteByCondition(String condition);
 
-    public String findIdCustomer(String condition);
+    public String findId(String condition);
 }

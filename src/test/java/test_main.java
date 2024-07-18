@@ -14,8 +14,8 @@ public class test_main {
         }catch (Exception e){
 
         }
-        new Login_View();
-//        new MainSection_View();
+//        new Login_View();
+        new MainSection_View();
 
 
     }

@@ -59,6 +59,7 @@ public class MainSection_Controller implements ActionListener {
             case "Bill" -> {
                 CardLayout cardLayout5 = (CardLayout) mainSection_view.getPanel_cardLayout().getLayout();
                 cardLayout5.show(mainSection_view.getPanel_cardLayout(), "Card 5");
+                updateComboBox_Bill();
             }
         }
 
@@ -296,7 +297,7 @@ public class MainSection_Controller implements ActionListener {
         mainSection_view.getComboBox_Cus().setFont(new Font("Arial", Font.PLAIN, 13));
         mainSection_view.getComboBox_Cus().addActionListener(e -> {
             String src = Objects.requireNonNull(mainSection_view.getComboBox_Cus().getSelectedItem()).toString();
-            String id = CustomerDAO.getInstance().findIdCustomer(src);
+            String id = CustomerDAO.getInstance().findId(src);
             mainSection_view.getField_idCus_o().setText(id);
         });
     }
@@ -312,8 +313,24 @@ public class MainSection_Controller implements ActionListener {
         mainSection_view.getComboBox_Product().setFont(new Font("Arial", Font.PLAIN, 13));
         mainSection_view.getComboBox_Product().addActionListener(e -> {
             String src = Objects.requireNonNull(mainSection_view.getComboBox_Product().getSelectedItem()).toString();
-            String id = CustomerDAO.getInstance().findIdCustomer(src);
+            String id = CustomerDAO.getInstance().findId(src);
             mainSection_view.getField_idProduct_o().setText(id);
+        });
+    }
+
+    private void updateComboBox_Bill() {
+        customers = CustomerDAO.getInstance().selectAll();
+
+        String[] nameCus = new String[customers.size()];
+        for (int i = 0; i < customers.size(); i++) {
+            nameCus[i] = customers.get(i).getName();
+        }
+        mainSection_view.getComboBox_Cus_Bill().setModel(new DefaultComboBoxModel<>(nameCus));
+        mainSection_view.getComboBox_Cus_Bill().setFont(new Font("Arial", Font.PLAIN, 13));
+        mainSection_view.getComboBox_Cus_Bill().addActionListener(e -> {
+            String src = Objects.requireNonNull(mainSection_view.getComboBox_Cus_Bill().getSelectedItem()).toString();
+            String id = CustomerDAO.getInstance().findId(src);
+            mainSection_view.getField_idCus_Bill().setText(id);
         });
     }
 }

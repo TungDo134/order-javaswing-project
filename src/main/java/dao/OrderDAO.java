@@ -175,7 +175,7 @@ public class OrderDAO implements DAOInterface<Order> {
     }
 
     @Override
-    public String findIdCustomer(String condition) {
+    public String findId(String condition) {
         return "";
     }
 

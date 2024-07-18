@@ -162,7 +162,7 @@ public class ProductDAO implements DAOInterface<Product> {
     }
 
     @Override
-    public String findIdCustomer(String condition) {
+    public String findId(String condition) {
         String result = "";
         try {
             Connection connection = JDBCUtil.getConnection();
